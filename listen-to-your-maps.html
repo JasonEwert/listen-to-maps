@@ -1,0 +1,505 @@
+<!DOCTYPE html>
+<html>
+    <head>
+		<title>Listen to your maps</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />		
+		<style>         
+		h1 {               
+			padding: 15% 5% 0% 5%;
+			text-align: center;
+			color:#003865;
+			font: 4.5em Verdana;
+		}
+		h2 {               
+			color:#003865;
+			font: 1.5em Verdana;
+		}
+		h3 {               
+			text-align: center;
+			color:#003865;
+			font: 3em Verdana;
+		}
+		li {
+		  margin: 20px 0;
+		}
+		i {
+			font: 0.7em Calibri;
+		}
+		iframe {
+			width:100%; 
+			height:70%;
+		}
+		input:focus-visible {
+		outline: 3px solid blue;
+		border-radius: 3px;
+		}
+		button:focus-visible {
+		outline: 3px solid blue;
+		border-radius: 3px;
+		}
+		.slide {               
+			height: 100vh; 
+			width:  100vw;		
+			/*
+			border-style: solid;
+			border-width: 2px;
+			*/
+		}
+		.content {               
+			height: 100%; 
+			width:  90%; 
+			padding: 0% 5% 0% 5%;
+			font: 1.75em Calibri;
+			color: #585858;
+			/*
+			border-style: dashed;
+			border-width: 1px;
+			*/
+		}
+		.content-center {               
+			height: 100%; 
+			width:  90%; 
+			padding: 0% 5% 0% 5%;
+			font: 1.75em Calibri;
+			text-align: center;
+		}
+		.text-block {               
+			max-width:  80%; 
+			padding: 0% 5% 0% 5%;
+		}
+		.slide-img {
+			width: 40%;
+			max-height: 75%;
+		}
+		.logo {
+			padding: 0% 0% 0% 0%;
+			float: right;
+		}		
+		</style>
+		<style>
+			_viewDiv {
+				padding: 0;
+				margin: 0;
+				height: 100%;
+				width: 100%;
+			}
+			/*box on the map with location search instructions */
+			.userNote, .userNoteInfo {
+				background-color: white;
+				padding: 15px;
+				max-width: 230px;
+				font-size: 110%;  
+			}
+
+			.userNote, .userNoteInfo  ul {
+				list-style-type:none;
+				margin-top: 0px;
+				margin-bottom: 0px;
+			}
+
+			.userNote, .userNoteInfo  p {
+				margin-top: 0px;
+				margin-bottom: 0px;
+			}
+			.userNote, .userNoteInfo  ol {
+				margin-top: 0px;
+				margin-bottom: 0px;
+			}
+		</style>
+		
+		<link rel="stylesheet" href="https://js.arcgis.com/4.25/esri/themes/light/main.css">
+		<script src="https://js.arcgis.com/4.25/"></script>
+
+		<script src="scripts/you-are-here.js"></script>
+		<script src="scripts/search-map.js"></script>
+
+		<script>      
+
+			let myMap = new YouAreHereMap();
+			myMap.viewDivId = "viewDiv";
+			myMap.loadMap();
+			
+			let myMap2 = new SearchMap();
+			myMap2.viewDivId = "viewDiv2";
+			myMap2.loadMap();
+
+		</script>
+	
+	</head>
+	<body>
+	
+<!--	
+	<div id="mask" style="position:fixed;width:100%;height:100%;z-index: 0;" tabindex="-1">
+	
+		<button class="button" style="float:right;" tabindex="-1" onclick="maskDiv()">Add mask</button>
+				
+		<script>
+			function maskDiv(){
+				let maskDiv = document.getElementById('mask');
+				if (maskDiv.style.opacity == 0.8){
+					maskDiv.style.cssText = "background-color:white;color:white;opacity:1;position:fixed;width:100%;height:10;z-index:0;tabindex:'-1'";
+				} else {
+					maskDiv.style.cssText = "background-color:white;color:white;opacity:0.8;position:fixed;width:100%;height:100%;z-index: 100;tabindex:'-1'";
+				};
+			};
+		</script>
+	
+	</div>
+-->	
+	
+	<div class='slide' >
+		<h1>Listen to your maps</h1>
+		<h3>a user experience</h3>
+		<div class='content-center'>
+			<p>Jason Ewert</p>
+			<p>October 2023</p>
+			<img src="files/state-logo.png" alt="small state of Minnesota logo featuring an M and an N"></img>
+		</div>
+	</div>
+	<div class='slide' >
+		<div class='content'>
+			<img class='logo' src="files/state-logo.png" alt="small state of Minnesota logo featureing an M and an N"></img>
+			<h2 >Topics</h2>
+			<div class='text-block'>
+				<ul>
+					<li>what is web content?</li>
+					<li>two</li>
+					<li>three</li>
+				</ul>
+			</div>
+		</div>
+	</div>
+	
+<!-- what is web content? -->
+
+	<div class='slide' >
+		<div class='content'>
+			<img class='logo' src="files/state-logo.png" alt="small state of Minnesota logo featureing an M and an N"></img>
+			<h2 >Web content is a structured document</h2>
+			<div class='text-block'>
+				<p style='color:blue'>&lt;headder&gt;</p>
+				<p style='color:blue'>&nbsp;&nbsp;&nbsp;&nbsp;&lt;nav&gt; </p>
+				<p style='color:blue'>&nbsp;&nbsp;&nbsp;&nbsp;&lt;main&gt; </p>
+				<p style='color:red'>&nbsp;&nbsp;&nbsp;&nbsp;&lt;h1&gt; </p>
+				<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;p&gt; </p>
+				<p style='color:red'>&nbsp;&nbsp;&nbsp;&nbsp;&lt;h2&gt; </p>
+				<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;ul&gt; &lt;li&gt; </p>
+				<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;ol&gt; &lt;li&gt; </p>
+				<p style='color:blue'>&lt;footer&gt;</p>
+			</div>
+		</div>
+	</div>
+	
+	<div class='slide' >
+		<div class='content'>
+			<img class='logo' src="files/state-logo.png" alt="small state of Minnesota logo featureing an M and an N"></img>
+			<h2 >Web content can be a form</h2>
+			<div class='text-block'>
+				<p style='color:blue'>&lt;form&gt;</p>
+				<p>&nbsp;&nbsp;&nbsp;&nbsp;&lt;input type="text"&gt; </p>
+				<p>&nbsp;&nbsp;&nbsp;&nbsp;&lt;input type="radio"&gt; </p>
+				<p>&nbsp;&nbsp;&nbsp;&nbsp;&lt;input type="checkbox"&gt; </p>
+				<p>&nbsp;&nbsp;&nbsp;&nbsp;&lt;input type="button"&gt; </p>
+				<p style='color:blue'>&lt;/form&gt;</p>
+			</div>
+		</div>
+	</div>
+	
+	<div class='slide' >
+		<div class='content'>
+			<img class='logo' src="files/state-logo.png" alt="small state of Minnesota logo featureing an M and an N"></img>
+			<h2 >Web content can be a form</h2>
+			<div class='text-block'>
+				<form>
+				  <label for="name">name:</label><input type="text" id="name" name="name"><br><br>
+
+				  <input type="radio" id="yes" name="yeano" value="yes"><label for="yes">yes</label><br>
+				  <input type="radio" id="no" name="yeano" value="no"><label for="no">no</label><br>
+				  <input type="radio" id="maybe" name="yeano" value="maybe"><label for="maybe">maybe</label><br><br>
+
+				  <input type="checkbox" id="vehicle1" name="vehicle1" value="Bike"><label for="vehicle1"> I have a bike</label><br>
+				  <input type="checkbox" id="vehicle2" name="vehicle2" value="Car"><label for="vehicle2"> I have a car</label><br>
+				  <input type="checkbox" id="vehicle3" name="vehicle3" value="Boat"><label for="vehicle3"> I have a boat</label>
+				</form>
+			</div>
+		</div>
+	</div>
+	
+	<div class='slide' >
+		<div class='content'>
+			<img class='logo' src="files/state-logo.png" alt="small state of Minnesota logo featureing an M and an N"></img>
+			<h2 >Web content can be an application</h2>
+			<div class='text-block'>
+				<div id= 'funWithJS' style='color:blue'>Look what I can do with JavaScript!</div>
+				<script>
+					
+					let element = document.getElementById('funWithJS');		
+					let time = 1500
+					let color = "blue";
+					let interval = 0;
+					
+					const runSwitcher = setInterval(switcher, time);
+
+					function switcher(){
+						if (color == "blue"){ color = "yellow"}
+						else {color = "blue"};
+						element.style.color = color;	
+						interval = interval + 1;
+						if (interval > 1000) {clearInterval(runSwitcher);};
+					};
+					
+					
+					
+				</script>
+				<p>Your web application could do anything from a search that's using the device location to flipping through a gallery of images.</p>
+				<p>We make this brave new world discoverable by building on previous experiences, standards, and conventions.</p>
+			</div>
+		</div>
+	</div>
+	
+	<div class='slide' >
+		<div class='content'>
+			<img class='logo' src="files/state-logo.png" alt="small state of Minnesota logo featureing an M and an N"></img>
+			<h2 >Intro to NVDA</h2>
+			<div class='text-block'>
+				<p>What does a web page sound like?</p></br>
+				<a href="https://www.pca.state.mn.us/about-mpca/about-us" target="_blank">MPCA About Us</a></br></br>
+				<!--
+				<p>What does a simple web map sound like?</p>
+				<a href="https://pca-gis02.pca.state.mn.us/EQB/" target="_blank">A simple web map (EQB's Environmental Review Projects)</a></br></br>
+				-->
+			</div>
+		</div>
+	</div>
+	
+	<div class='slide' >
+		<div class='content'>
+			<h2>What does a Google map sound like</h2>
+			<div class='text-block'>
+				<p>The Google Maps workflow is search first, results list, then map. (focus order)</p>
+				<p>It can be used in a map-first mode that accommodates screen readers.</p>
+				<a href="https://www.google.com/maps" target="_blank">Google Maps</a></br></br>
+				<a href="https://www.bing.com/maps" target= "_blank">Bing Maps</a></br></br>
+				<a href="https://www.openstreetmap.org" target= "_blank">OSM</a>
+			</div>
+		</div>
+	</div>
+	
+	<div class='slide' >
+		<div class='content'>
+			<h2>Search</h2>
+			<div class='text-block'>
+				<!--
+				<p>Use the Search box to learn more about this location.</p>
+				-->
+
+				 <form onsubmit="return false;" style="border-style: solid;width:900px;">      
+                    <input type="text" name="Minnesota city search" id="searchText" placeholder="city search"></input></br>
+                    <div class="btn-block">
+                        <button value="Find" id="findBtn">Search</button>
+                    </div>
+                </form>
+			  
+				<div style= "height:400px; width:900px; border-style: solid;">
+					<div id="searchResults" tabindex="0" style= "height:100%; width:30%; float: left" >
+						<h4>Search Results:</h4>
+						<div id="searchResultsList"></div>	
+					</div>
+					<div id="viewDiv2" style= "height:100%; width:70%; float: right" role="application" title="A map of Minnesota showing satellite images. The map displays the cities' boundaries from the search results list.">
+					</div>
+				</div>
+				
+			</div>
+		</div>
+	</div>
+
+	<div class='slide' >
+		<div class='content'>
+			<img class='logo' src="files/state-logo.png" alt="small state of Minnesota logo featureing an M and an N"></img>
+			<h2 >Focus flow</h2>
+			<div class='text-block'>
+				<p>onClick run the search and send the focus to the search results.</p>
+				<p>getElementById("searchResults")<b>.focus()</b></p>
+				<p>getElementById("searchText").focus();</p>
+				<p>This requires a tabindex >= 0. Use 0 to maintain the application's natural flow. </p>
+			</div>
+		</div>
+	</div>
+
+	<div class='slide' >
+		<div class='content'>
+			<img class='logo' src="files/state-logo.png" alt="small state of Minnesota logo featureing an M and an N"></img>
+			<h2 >Application description</h2>
+			<div class='text-block'>
+				<p>Set the <b>role and title</b> of your application's min div</p>
+				<p>myViewDiv.setAttribute('role', 'application')</p>
+				<p>myViewDiv.setAttribute('title', 'A map of your search results.')</p>
+			</div>
+		</div>
+	</div>
+
+	<div class='slide' >
+		<div class='content'>
+			<h2>Map navigation and description.</h2>
+			<div class='text-block'>
+				
+				<div id="viewDiv" style= "height:400px; width:900px" ></div>
+		
+			</div>
+		</div>
+	</div>
+
+	<div class='slide' >
+		<div class='content'>
+			<h2>Map navigation and description.</h2>
+			<div class='text-block'>
+
+				<p>Query the map and tell me about it.</p>
+				<p>Use custom key commands "Alt-i", or "Alt-s" to learn more.</p>
+				<p>Use the plus, minus, and arrow keys to navigate.</p>
+				
+			</div>
+		</div>
+	</div>
+
+	<div class='slide' >
+		<div class='content'>
+			<img class='logo' src="files/state-logo.png" alt="small state of Minnesota logo featureing an M and an N"></img>
+			<h2 >Accessible Rich Internet Applications</h2>
+			<div class='text-block'>
+				<p><b>ARIA live regions</b> define dynamic content</p>
+				<p>As an area of dynamic content changes, read it to me.</p>
+				<p>(search results, error and success messages, banners)</p>
+				<p>resultsDiv.setAttribute(<b>'aria-live', 'polite'</b>);</p>
+				<p>The default state is 'off', use 'polite' mode!</p>
+				<p>resultsDiv.setAttribute(<b>'aria-atomic', 'true'</b>);</p>
+				<p>Reread the full div, not just the changes.</p>
+				
+			</div>
+		</div>
+	</div>
+
+	<div class='slide' >
+		<div class='content'>
+			<img class='logo' src="files/state-logo.png" alt="small state of Minnesota logo featureing an M and an N"></img>
+			<h2 >Keyup events</h2>
+			<div class='text-block'>
+				<p><b>watching for the keyup</b> (not keypress!)</p>
+				<p>document.addEventListener('keyup', myFunction());</p>
+				<p>If the keyup is Alt+i (alt === true && key === 73)</p>
+				<p>myFunction is finding features using the view.center property.</p>
+				<p>If the key is an arrow key</p>
+				<p>myFunction is updating the location of the search box graphic.</p>
+				<p>It then updates a div with either the results or the direction.</p>				
+				
+			</div>
+		</div>
+	</div>
+
+	<div class='slide' >
+		<div class='content'>
+			<img class='logo' src="files/state-logo.png" alt="small state of Minnesota logo featureing an M and an N"></img>
+			<h2 >Adding a button to an Esri map</h2>
+			<div class='text-block'>
+
+				<p><b>Create the div.</b></p>
+				<p>const myBtn = document.createElement("div")</p>	
+				<p>myBtn.title = "Information Tool"</p>
+				<p>myBtn.id = "infoTool"</p>
+				<p>myBtn.setAttribute('tabindex', '0')</p>
+				<p>myBtn.classList.add("esri-widget--button","esri-widget", "esri-interactive")</p>					
+				
+			</div>
+		</div>
+	</div>
+
+	<div class='slide' >
+		<div class='content'>
+			<img class='logo' src="files/state-logo.png" alt="small state of Minnesota logo featureing an M and an N"></img>
+			<h2 >Adding a button to an Esri map</h2>
+			<div class='text-block'>
+
+				<p><b>Set its content.</b></p>
+				<p>myBtn.innerHTML = "&lt;span aria-hidden='true' role='presentation' class='esri-icon <b>esri-icon-search</b>'&gt;&lt;/span&gt;"</p>
+				<p>myBtn.innerHTML += "&lt;span class='<b>esri-icon-font-fallback-text</b>'&gt;Get Information. Press the i key to get info.&lt;/span&gt;"</p>						
+				
+			</div>
+		</div>
+	</div>
+
+	<div class='slide' >
+		<div class='content'>
+			<img class='logo' src="files/state-logo.png" alt="small state of Minnesota logo featureing an M and an N"></img>
+			<h2 >Adding a button to an Esri map</h2>
+			<div class='text-block'>
+
+				<p><b>Add it to your map view, and give it a job.</b></p>
+				<p>view.ui.add(myBtn, "top-left"); </p>
+				<p>myBtn.addEventListener("click", myFunction () {...})</p>							
+				
+			</div>
+		</div>
+	</div>
+	
+	
+	
+	
+	<!-- recap -->
+	<div class='slide' >
+		<div class='content'>
+			<img class='logo' src="files/state-logo.png" alt="small state of Minnesota logo featureing an M and an N"></img>
+			<h2 >Recap</h2>
+			<div class='text-block'>
+				<p>Plan for a logical flow. search > results > map</p>
+				<p><a href='https://experience.arcgis.com/experience/6f8337fd9db54c0ebe3f7a66c4cf3cc2' target='_blank'>Be descriptive.</a></p>
+				<p>Dynamic content should be read.</p>
+				<p>Use custom keyup events and map buttons carefully.</p>
+				<p>A web application can be any crazy thing your customers come up with!</p>
+				<p>Reuse common patterns and techniques.</p>
+			</div>
+		</div>
+	</div>
+
+	
+	<!-- Resources -->
+	<div class='slide' >
+		<div class='content'>
+			<img class='logo' src="files/state-logo.png" alt="small state of Minnesota logo featureing an M and an N"></img>
+			<h2>Resources</h2>
+			<div class='text-block'>
+				<p><a href='https://mn.gov/mnit/about-mnit/accessibility/maps/web.jsp' target = '_blank'>MNIT Interactive Web Map accessibility resources</a> </p>
+				<p><a href='https://github.com/Esri/a11y-map/tree/master' target = '_blank'>Esri's a11y map repo</a> </p>
+				<p><a href='https://www.esri.com/arcgis-blog/products/js-api-arcgis/developers/build-accessible-web-apps-with-arcgis-maps-sdk-for-javascript-and-calcite-design-system/' target = '_blank'>Esri's "Build accessible web maps..." a blog post</a> </p>
+				<!--  13 lines, that's about the length of list that will fit on a slide. -->
+			</div>
+		</div>
+	</div>
+	<div class='slide' >
+		<h1></h1>
+		<h3>"Good design makes hard things easy."</h3>
+		<div class='content-center'>
+			<p>- François Chollet</p>
+			</br>
+			<p><i>Enjoy, and thanks for hanging out with me today! - Jason</i></p>
+			<p><i>jason.ewert@state.mn.us</i></p>
+			<p><i>github.com/JasonEwert</i></p>
+		</div>
+	</div>
+	<!--
+	<div class='slide' >
+		<div class='content'>
+			<h2>A New Slide</h2>
+			<div class=''>
+				<p>some text</p>
+			</div>
+		</div>
+	</div>
+	-->
+	
+	
+	
+	
+	
+	
+	</body>
+</html>	
