@@ -10,9 +10,6 @@ class SearchMap {
 	async loadMap() {
 		const viewDiv = this._viewDivId;
 		var view;
-		var mapExtent;
-
-		let updateView = (view) => this._view = view;
 
 	try{
 		require([
@@ -23,31 +20,20 @@ class SearchMap {
 			"esri/widgets/ScaleBar",
 			"esri/geometry/support/webMercatorUtils",
 			"esri/layers/FeatureLayer",
-			"esri/widgets/Search",
-			"esri/geometry/Extent",
-			"esri/core/reactiveUtils",
-			
-			"esri/rest/find", "esri/rest/support/FindParameters",
-			
-			"esri/renderers/SimpleRenderer",
-			"esri/symbols/SimpleFillSymbol",
-			"esri/geometry/geometryEngine",
+			"esri/rest/find",
+			 "esri/rest/support/FindParameters",
 			"esri/Graphic",
 			"esri/layers/GraphicsLayer"
 			
 			],
 		function(Map, MapView, Basemap, BasemapToggle, 
 				 ScaleBar,webMercatorUtils,
-				  FeatureLayer, Search, Extent, reactiveUtils,
-				  
+				  FeatureLayer,
 				  find, FindParameters,
-				  
-				  SimpleRenderer, SimpleFillSymbol, geometryEngine,
 				  Graphic, GraphicsLayer
 				  
 				) {
-
-					
+				
 					const ctuLayer = new FeatureLayer({
 					  // URL to the service
 					  url: "https://pca-gis02.pca.state.mn.us/arcgis/rest/services/WIMN/xsearch2/MapServer/0"
@@ -65,8 +51,6 @@ class SearchMap {
 						width: 1
 					  }
 					};
-
-
 
                     /*****************************************************************
                      * make the map already!
@@ -199,73 +183,7 @@ class SearchMap {
 					
 					document.getElementById("findBtn").addEventListener("click", doFind);
 					
-					
-				
 
-                      /*****************************************************************
-					  * searchView UI
-					  *****************************************************************/
-
-					  const theExtent = new Extent({
-						xmin: -89.58,
-						ymin: 43.5,
-						xmax: -97.25,
-						ymax: 49.37,
-						spatialReference: { "wkid": 4326 }
-					  });
-
-					  const searchExtent = {
-						geometry: theExtent
-					  };
-
-					  const searchWidget = new Search({
-						view: view,
-						allPlaceholder: "enter an address",
-						includeDefaultSources: false,
-						suggestionsEnabled: true,
-						popupEnabled: true,
-						searchAllEnabled: true,
-						locationEnabled: false,
-						maxResults: 6,
-						maxSuggestions: 4,
-						sources: [{
-							layer: ctuLayer,
-							placeholder: "municipality",
-							maxResults: 4,
-							searchFields: ["NAME"],
-							displayFields: ["NAME"],
-							name: "municipality"
-						}],
-	//					container: mapSearchDiv
-					  });
-
-				//	  view.ui.add(searchWidget, {
-				//		position: "top-right"
-				//	  });
-
-					  // on popup close, returns focus to the search box
-					  // from Kitty's accessibliity blog post
-					  // this works great and should be part of the API!
-
-					  searchWidget.on("search-complete", () => onSearchComplete());
-
-					  let abortController = null;
-
-					  async function onSearchComplete() {
-						
-						abortController?.abort();
-						const { signal } = (abortController = new AbortController());
-
-						// When the popup is visible set focus on it.
-						await reactiveUtils.whenOnce(() => view.popup.visible, signal);
-						view.popup.focus();
-
-						// And when the popup is closed move the focus back to the search widget.
-						await reactiveUtils.whenOnce(() => !view.popup.visible, signal);
-						searchWidget.focus();
-					  };
-	  
-	  
 					/*****************************************************************
                      * basemap toggle
                      *****************************************************************/
@@ -299,8 +217,6 @@ class SearchMap {
 
                     view.ui.add(basemapToggle, "bottom-right");
                     view.ui.add(scaleBar, {position: "bottom-left"});
- 
-
                     
                     }); 
                     } catch (error) {

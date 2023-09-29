@@ -112,6 +112,7 @@
 
 		<script src="scripts/you-are-here.js"></script>
 		<script src="scripts/search-map.js"></script>
+		<script src="scripts/search-map2.js"></script>
 
 		<script>      
 
@@ -122,6 +123,10 @@
 			let myMap2 = new SearchMap();
 			myMap2.viewDivId = "viewDiv2";
 			myMap2.loadMap();
+
+			let myMap3 = new SearchMap2();
+			myMap3.viewDivId = "viewDiv3";
+			myMap3.loadMap();
 
 		</script>
 	
@@ -162,9 +167,10 @@
 			<h2 >Topics</h2>
 			<div class='text-block'>
 				<ul>
-					<li>what is web content?</li>
-					<li>two</li>
-					<li>three</li>
+					<li>What does a screen reader see?</li>
+					<li>Inrto to NVDA, a test drive.</li>
+					<li>Screen readers and web maps.</li>
+					<li>How to: Map search and map description.</li>
 				</ul>
 			</div>
 		</div>
@@ -175,7 +181,7 @@
 	<div class='slide' >
 		<div class='content'>
 			<img class='logo' src="files/state-logo.png" alt="small state of Minnesota logo featureing an M and an N"></img>
-			<h2 >Web content is a structured document</h2>
+			<h2 >A well structured document</h2>
 			<div class='text-block'>
 				<p style='color:blue'>&lt;headder&gt;</p>
 				<p style='color:blue'>&nbsp;&nbsp;&nbsp;&nbsp;&lt;nav&gt; </p>
@@ -193,7 +199,7 @@
 	<div class='slide' >
 		<div class='content'>
 			<img class='logo' src="files/state-logo.png" alt="small state of Minnesota logo featureing an M and an N"></img>
-			<h2 >Web content can be a form</h2>
+			<h2 >Forms are common</h2>
 			<div class='text-block'>
 				<p style='color:blue'>&lt;form&gt;</p>
 				<p>&nbsp;&nbsp;&nbsp;&nbsp;&lt;input type="text"&gt; </p>
@@ -208,9 +214,9 @@
 	<div class='slide' >
 		<div class='content'>
 			<img class='logo' src="files/state-logo.png" alt="small state of Minnesota logo featureing an M and an N"></img>
-			<h2 >Web content can be a form</h2>
-			<div class='text-block'>
-				<form>
+			<h2 >Test drive a form.</h2>
+			<div class='text-block' role="application" title="a form for demonstration.">
+				<form id="myForm">
 				  <label for="name">name:</label><input type="text" id="name" name="name"><br><br>
 
 				  <input type="radio" id="yes" name="yeano" value="yes"><label for="yes">yes</label><br>
@@ -219,7 +225,9 @@
 
 				  <input type="checkbox" id="vehicle1" name="vehicle1" value="Bike"><label for="vehicle1"> I have a bike</label><br>
 				  <input type="checkbox" id="vehicle2" name="vehicle2" value="Car"><label for="vehicle2"> I have a car</label><br>
-				  <input type="checkbox" id="vehicle3" name="vehicle3" value="Boat"><label for="vehicle3"> I have a boat</label>
+				  <input type="checkbox" id="vehicle3" name="vehicle3" value="Boat"><label for="vehicle3"> I have a boat</label><br>
+
+				  <input type="reset" id="submit1" value="Submit"></button>
 				</form>
 			</div>
 		</div>
@@ -288,7 +296,7 @@
 	<div class='slide' >
 		<div class='content'>
 			<h2>Search</h2>
-			<div class='text-block'>
+			<div class='text-block'  role="application" title="Search for cities in Minnesota.">
 				<!--
 				<p>Use the Search box to learn more about this location.</p>
 				-->
@@ -343,7 +351,7 @@
 			<h2>Map navigation and description.</h2>
 			<div class='text-block'>
 				
-				<div id="viewDiv" style= "height:400px; width:900px" ></div>
+				<div id="viewDiv" style= "height:400px; width:900px" role="application" title="Describe this map to me."></div>
 		
 			</div>
 		</div>
@@ -460,6 +468,31 @@
 		</div>
 	</div>
 
+	<div class='slide' >
+		<div class='content'>
+			<img class='logo' src="files/state-logo.png" alt="small state of Minnesota logo featureing an M and an N"></img>
+			<h2 >The to-do list</h2>
+			<div class='text-block'>
+				<p>Use section elements main, nav, headder, and footer.</p>
+				<p>Create roles and titles for my map div.</p>
+				<p>Write more descriptive titles for application elements.</p>
+				<p>Set tabindex on application divs.</p>
+				<p>Handle dynamic content, take control of the focus order.</p>
+			</div>
+		</div>
+	</div>
+
+	<div class='slide' >
+		<div class='content'>
+			<h2>Another search example.</h2>
+			<div class='text-block'>
+				
+				<div id="viewDiv3" style= "height:400px; width:900px" role="application" title="Esri search widget focus flow."></div>
+		
+			</div>
+		</div>
+	</div>
+
 	
 	<!-- Resources -->
 	<div class='slide' >
@@ -470,10 +503,12 @@
 				<p><a href='https://mn.gov/mnit/about-mnit/accessibility/maps/web.jsp' target = '_blank'>MNIT Interactive Web Map accessibility resources</a> </p>
 				<p><a href='https://github.com/Esri/a11y-map/tree/master' target = '_blank'>Esri's a11y map repo</a> </p>
 				<p><a href='https://www.esri.com/arcgis-blog/products/js-api-arcgis/developers/build-accessible-web-apps-with-arcgis-maps-sdk-for-javascript-and-calcite-design-system/' target = '_blank'>Esri's "Build accessible web maps..." a blog post</a> </p>
+				<p><a href="https://www.youtube.com/watch?v=qdB8SRhqvFc" target="_blank">ARIA, Accessibility APIs and coding like you give a damn! - Léonie Watson</a></p>
 				<!--  13 lines, that's about the length of list that will fit on a slide. -->
 			</div>
 		</div>
 	</div>
+
 	<div class='slide' >
 		<h1></h1>
 		<h3>"Good design makes hard things easy."</h3>

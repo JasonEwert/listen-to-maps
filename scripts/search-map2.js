@@ -1,53 +1,4 @@
-<html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <meta
-      name="viewport"
-      content="initial-scale=1,maximum-scale=1,user-scalable=no"
-    />
-    <title>
-      Map accessibility - search
-    </title>
-    <style>
-        html,
-        body,
-        _viewDiv {
-          padding: 0;
-          margin: 0;
-          height: 100%;
-          width: 100%;
-        }
-        /*box on the map with location search instructions */
-          .userNote, .userNoteInfo {
-            background-color: white;
-            padding: 15px;
-            max-width: 230px;
-            font-size: 110%;  
-          }
-  
-          .userNote, .userNoteInfo  ul {
-            list-style-type:none;
-            margin-top: 0px;
-            margin-bottom: 0px;
-          }
-  
-          .userNote, .userNoteInfo  p {
-            margin-top: 0px;
-            margin-bottom: 0px;
-          }
-          .userNote, .userNoteInfo  ol {
-            margin-top: 0px;
-            margin-bottom: 0px;
-          }
-      </style>
-
-
-    <link rel="stylesheet" href="https://js.arcgis.com/4.25/esri/themes/light/main.css">
-    <script src="https://js.arcgis.com/4.25/"></script>
-
-    <script>
-
-class SearchMap { 
+class SearchMap2 { 
 	_view;
 	_viewDivId = "viewDiv";
 
@@ -59,9 +10,6 @@ class SearchMap {
 	async loadMap() {
 		const viewDiv = this._viewDivId;
 		var view;
-		var mapExtent;
-
-		let updateView = (view) => this._view = view;
 
 	try{
 		require([
@@ -69,18 +17,15 @@ class SearchMap {
 			"esri/views/MapView",
 			"esri/Basemap",
 			"esri/widgets/BasemapToggle",
-			
 			"esri/widgets/ScaleBar",
-			"esri/geometry/support/webMercatorUtils",
-			
 			"esri/layers/FeatureLayer",
 			"esri/widgets/Search",
 			"esri/geometry/Extent",
 			"esri/core/reactiveUtils"
 			],
 		function(Map, MapView, Basemap, BasemapToggle, 
-				 ScaleBar,webMercatorUtils,
-				  FeatureLayer, Search, Extent, reactiveUtils
+				 ScaleBar,FeatureLayer, Search, Extent, reactiveUtils
+				  
 				) {
 
 					
@@ -88,28 +33,24 @@ class SearchMap {
 					  // URL to the service
 					  url: "https://pca-gis02.pca.state.mn.us/arcgis/rest/services/WIMN/xsearch2/MapServer/0"
 					});
-
-
-
+					
                     /*****************************************************************
                      * make the map already!
                      *****************************************************************/
 
                     const map = new Map({
-                    basemap: "hybrid", //"streets-vector",
+                    basemap: "satellite", //"hybrid", //"streets-vector",
                     layers: []
                     });
 
                     view = new MapView({
                     container: viewDiv,
                     map: map,
-                    center: [-94.1, 46.1],
-					zoom: 7
+                    center: [-94.5, 46.1],
+					zoom: 10
                     });
-
-
-
-                    /*****************************************************************
+					
+                      /*****************************************************************
 					  * searchView UI
 					  *****************************************************************/
 
@@ -142,11 +83,8 @@ class SearchMap {
 							searchFields: ["NAME"],
 							displayFields: ["NAME"],
 							name: "municipality"
-						}]
-					  });
-
-					  view.ui.add(searchWidget, {
-						position: "top-right"
+						}],
+			//			container: mapSearchDiv
 					  });
 
 					  // on popup close, returns focus to the search box
@@ -203,37 +141,13 @@ class SearchMap {
                      * UI
                      *****************************************************************/
 
-                    view.ui.add(basemapToggle, "bottom-right");
+                    view.ui.add(searchWidget, {position: "top-right"});
+					view.ui.add(basemapToggle, "bottom-right");
                     view.ui.add(scaleBar, {position: "bottom-left"});
- 
 
-                    
                     }); 
                     } catch (error) {
 
                 };
             };
         };
-
-    </script>
-
-
-    <script>      
-
-        let myMap = new SearchMap();
-        myMap.viewDivId = "viewDiv3";
-        myMap.loadMap();
-
-    </script>
-
-  </head>
-  <body>
-
-	<p>Use the Information Tool to learn more about this location.</p>
-	<p>Use the plus, minus, and arrow keys to zoom and move the map.</p>
-	<p>Use the "i" key to return a list of location information.</p>
-
-	<div id="viewDiv3" style= "height:800px; width:800px" ></div>
-
-  </body>
-</html>

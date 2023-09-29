@@ -110,7 +110,7 @@ class YouAreHereMap {
 						btnKeyboard.classList.add("esri-widget--button","esri-widget", "esri-interactive");
 						// icons: esri-icon-search esri-icon-locate esri-icon-description
 						btnKeyboard.innerHTML = "<span aria-hidden='true' role='presentation' class='esri-icon esri-icon-search'></span>"
-						btnKeyboard.innerHTML += "<span class='esri-icon-font-fallback-text'>Get Information. Use the keyboard to center the map on a feature. Press the i key to get info.</span>";
+						btnKeyboard.innerHTML += "<span class='esri-icon-font-fallback-text'>Get Information. Use the keyboard to center the map. Press Alt i to learn more about this map.</span>";
 						//view.ui.add(btnKeyboard, "top-left"); 
 
 						/********* Functions for using keyboard to click features on the map and open a popup *************/
