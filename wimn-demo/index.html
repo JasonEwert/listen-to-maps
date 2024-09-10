@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="initial-scale=1,maximum-scale=1,user-scalable=no"
+    />
+    <title>What's in My Neighborhood</title>
+
+    <link rel="stylesheet" href="shepherd/shepherd.css"/>
+    <script type="text/javascript" src="shepherd/shepherd.min.js"></script>
+    <link rel="stylesheet" href="https://js.arcgis.com/4.21/esri/themes/light/main.css" />
+    <link rel="icon" type="image/x-icon" href="favicon.png">
+    <link rel="stylesheet" href="css/dialog.css" />
+    <link rel="stylesheet" href="css/tour.css" />
+    <link rel="stylesheet" href="css/map.css" />
+
+    <script type="text/javascript" src="js/check_ie.js"></script>
+
+    <script type="text/javascript" src="js/utils.js"></script>
+    <script type="text/javascript" src="js/pdf-lib/dist/pdf-lib.min.js"></script>
+    <script type="text/javascript" src="js/downloadjs/download.js"></script>
+    <script src="https://js.arcgis.com/4.21/"></script>
+    <script type="text/javascript" src="js/querylayers.js"></script>
+    <script type="text/javascript" src="js/bmpText.js"></script>
+
+  </head>
+  <body>
+     <header class="mainHeader">
+      <img src="img/mpca-logo-white-type-green-m.png" alt="Minnesota Pollution Control Agency Logo"><h1 id="MapTitle">What's in My Neighborhood <button id="trigger" class="btnInfo" onclick="openDialog('dialog', this)" >&#8505;</button></h1>
+    </header> 
+    <main>
+      <div id="leftSidebar" class="esri-widget">
+        <p id="searchInstructions" tabIndex="0" class="sidebarHeader">Find sites near me</p>
+        <div class="searchOptions">
+            <button id="permitSearch" type="button" class="horizontalTab active" onclick="toggleSearch('searchByPermit','searchByLoc')">Facility locations</button>
+            <button id="pointSearch" type="button" class="horizontalTab" onclick="toggleSearch('searchByLoc','searchByPermit')">Specified location</button>
+            <div id="searchByPermit">
+              <label for="inputTxt">Enter permit or project ID</label><br />
+              <input class="form-control" type="text" id="inputTxt" />
+              <button class="btn pca-btn-primary" value="Find" id="findBtn">Search</button>
+              <p><a id="iswLookup" href="https://webapp.pca.state.mn.us/wimn/search/advancedSearch" target="_blank">Need to look up your permit or project ID?</a></p>
+            </div> 
+            <div id="searchByLoc" style="display: none;">
+              <p tabIndex="0" id="setLocInstructions">To search for sites within one mile: <ol tabIndex="0"><li>Activate the Set Location button</li><li>Click a location on the map <br /> --OR-- <br />Use the keyboard to center the map on a location<br/>Press the <b>s</b> key</></ol></p><p>Keyboard map navigation: <ul><li> Use <b>arrows</b> to move the map</li><li><b>+</b> key to zoom in</li><li><b>-</b> key to zoom out</li></ul></p><button id="btnLocation" class="btn  pca-btn-primary" title="Point Tool">Set Location</button>
+            </div>   
+        </div>
+        <div id="resultsSection" role="region" tabIndex="-1" aria-atomic="true" style="display: none;">
+        <div class="resultsHeader" tab-index="-1">Sites within 1 mile </div>
+          <div><button class="btn pca-btn-primary print-button" data-id="0" value="Create PDF Report" id="print-button">Download PDF Report</button>
+          </div>
+          <img style="clear:right;" id="loading" alt="loading" src="img/loading.gif"/>
+          <div id="searchRes" tab-index="0"></div>
+        </div>
+      </div>
+      <div id="viewDiv"></div>
+      <div id="dialog" tab-index="-1" role="dialog" aria-modal="true" aria-labelledby="dialogTitle" aria-describedby="description">
+        <div role="document" tabIndex="0">
+          <img id="dialogLogo" src="img/MPCA-Logo-RGB-24bit-trans.png" alt="Minnesota Pollution Control Agency Logo"> <br />
+          <h1 id="dialogTitle"  >What's in My Neighborhood Search Tool</h1>
+          <p id="description"  >Welcome to the What's in My Neighborhood search tool. This tool is ... needs about text here. <br /><a href="https://www.pca.state.mn.us/about-mpca/mpca-website-policies-and-disclaimers" target="_blank">MPCA website policies and disclaimers</a></p>
+          <button class="btn pca-btn-primary" value="Launch Map Tour" id="mapTour">Launch Map Tour</button> <button id="close"  class="btn pca-btn-primary" aria-label="close" onclick="closeDialog(this)">Close</button>
+        </div>
+      </div>
+  </main>
+  <script type="text/javascript" src="js/map.js"></script>
+  <script src="js/tour.js"></script>
+  <script type="text/javascript" src="js/dialog.js"></script>
+  </body>
+</html>
