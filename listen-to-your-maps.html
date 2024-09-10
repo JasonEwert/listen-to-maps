@@ -113,6 +113,7 @@
 		<script src="scripts/you-are-here.js"></script>
 		<script src="scripts/search-map.js"></script>
 		<script src="scripts/search-map2.js"></script>
+		<script src="scripts/accessibility-describe.js"></script>
 
 		<script>      
 
@@ -128,36 +129,35 @@
 			myMap3.viewDivId = "viewDiv3";
 			myMap3.loadMap();
 
-		</script>
-	
-	</head>
-	<body>
-	
-<!--	
-	<div id="mask" style="position:fixed;width:100%;height:100%;z-index: 0;" tabindex="-1">
-	
-		<button class="button" style="float:right;" tabindex="-1" onclick="maskDiv()">Add mask</button>
-				
-		<script>
+			let myMap4 = new  describeMap();
+			myMap4.viewDivId = "viewDiv4";
+			myMap4.loadMap();
+
 			function maskDiv(){
-				let maskDiv = document.getElementById('mask');
-				if (maskDiv.style.opacity == 0.8){
-					maskDiv.style.cssText = "background-color:white;color:white;opacity:1;position:fixed;width:100%;height:10;z-index:0;tabindex:'-1'";
+				let maskDiv = document.getElementById('body-main');
+				if (maskDiv.style.opacity == 0.1){
+					maskDiv.style.cssText = "opacity:1;";
 				} else {
-					maskDiv.style.cssText = "background-color:white;color:white;opacity:0.8;position:fixed;width:100%;height:100%;z-index: 100;tabindex:'-1'";
+					maskDiv.style.cssText = "opacity:0.1;";
 				};
 			};
 		</script>
 	
+	</head>
+	<body id="body-main">
+	
+	<!--
+	<div id="mask" style="position:fixed;width:98%;height:100%;z-index: 0;" tabindex="-1">
+		<button class="button" style="float:right;" tabindex="-1" onclick="maskDiv()">Add mask</button>
 	</div>
--->	
+	-->
 	
 	<div class='slide' >
 		<h1>Listen to your maps</h1>
 		<h3>a user experience</h3>
 		<div class='content-center'>
 			<p>Jason Ewert</p>
-			<p>October 2023</p>
+			<p>July 2024</p>
 			<img src="files/state-logo.png" alt="small state of Minnesota logo featuring an M and an N"></img>
 		</div>
 	</div>
@@ -170,7 +170,7 @@
 					<li>What does a screen reader see?</li>
 					<li>Inrto to NVDA, a test drive.</li>
 					<li>Screen readers and web maps.</li>
-					<li>How to: Map search and map description.</li>
+					<li>Searching and "alt text"</li>
 				</ul>
 			</div>
 		</div>
@@ -206,6 +206,9 @@
 				<p>&nbsp;&nbsp;&nbsp;&nbsp;&lt;input type="radio"&gt; </p>
 				<p>&nbsp;&nbsp;&nbsp;&nbsp;&lt;input type="checkbox"&gt; </p>
 				<p>&nbsp;&nbsp;&nbsp;&nbsp;&lt;input type="button"&gt; </p>
+
+				<p>&nbsp;&nbsp;&nbsp;&nbsp;&lt;div tabindex="0" role="button" id="action"&gt;Submit&lt;/div&gt;</p>
+
 				<p style='color:blue'>&lt;/form&gt;</p>
 			</div>
 		</div>
@@ -236,22 +239,24 @@
 	<div class='slide' >
 		<div class='content'>
 			<img class='logo' src="files/state-logo.png" alt="small state of Minnesota logo featureing an M and an N"></img>
-			<h2 >Web content can be an application</h2>
+			
+			<h2 >Your web content could be an application</h2>
 			<div class='text-block'>
-				<div id= 'funWithJS' style='color:blue'>Look what I can do with JavaScript!</div>
+				<div id= 'funWithJS' style='color:blue; font-family: Courier New'>Look what I can do with JavaScript!</div>
+
 				<script>
 					
 					let element = document.getElementById('funWithJS');		
 					let time = 1500
-					let color = "blue";
+					let font = "Courier New";
 					let interval = 0;
 					
 					const runSwitcher = setInterval(switcher, time);
 
 					function switcher(){
-						if (color == "blue"){ color = "yellow"}
-						else {color = "blue"};
-						element.style.color = color;	
+						if (font == "Courier New"){ font = "Brush Script MT"}
+						else {font = "Courier New"};
+						element.style.fontFamily = font;	
 						interval = interval + 1;
 						if (interval > 1000) {clearInterval(runSwitcher);};
 					};
@@ -282,6 +287,7 @@
 	
 	<div class='slide' >
 		<div class='content'>
+			<img class='logo' src="files/state-logo.png" alt="small state of Minnesota logo featureing an M and an N"></img>
 			<h2>What does a Google map sound like</h2>
 			<div class='text-block'>
 				<p>The Google Maps workflow is search first, results list, then map. (focus order)</p>
@@ -295,7 +301,9 @@
 	
 	<div class='slide' >
 		<div class='content'>
-			<h2>Search</h2>
+			<img class='logo' src="files/state-logo.png" alt="small state of Minnesota logo featureing an M and an N"></img>
+			<button class="button" style="float:right;" tabindex="-1" onclick="maskDiv()">Add mask</button>
+			<h2>Search with descriptive results</h2>
 			<div class='text-block'  role="application" title="Search for cities in Minnesota.">
 				<!--
 				<p>Use the Search box to learn more about this location.</p>
@@ -313,7 +321,7 @@
 						<h4>Search Results:</h4>
 						<div id="searchResultsList"></div>	
 					</div>
-					<div id="viewDiv2" style= "height:100%; width:70%; float: right" role="application" title="A map of Minnesota showing satellite images. The map displays the cities' boundaries from the search results list.">
+						<div id="viewDiv2" style= "height:100%; width:70%; float: right" role="application" title="A map of Minnesota showing satellite images. The map displays city boundaries from the search results list.">
 					</div>
 				</div>
 				
@@ -328,7 +336,6 @@
 			<div class='text-block'>
 				<p>onClick run the search and send the focus to the search results.</p>
 				<p>getElementById("searchResults")<b>.focus()</b></p>
-				<p>getElementById("searchText").focus();</p>
 				<p>This requires a tabindex >= 0. Use 0 to maintain the application's natural flow. </p>
 			</div>
 		</div>
@@ -339,19 +346,20 @@
 			<img class='logo' src="files/state-logo.png" alt="small state of Minnesota logo featureing an M and an N"></img>
 			<h2 >Application description</h2>
 			<div class='text-block'>
-				<p>Set the <b>role and title</b> of your application's min div</p>
+				<p>Set the <b>role and title</b> of your application's main div</p>
 				<p>myViewDiv.setAttribute('role', 'application')</p>
-				<p>myViewDiv.setAttribute('title', 'A map of your search results.')</p>
+				<p>myViewDiv.setAttribute('title', 'A map of Minnesota showing satellite images. The map displays city boundaries from the search results list')</p>
 			</div>
 		</div>
 	</div>
 
 	<div class='slide' >
 		<div class='content'>
-			<h2>Map navigation and description.</h2>
+			<img class='logo' src="files/state-logo.png" alt="small state of Minnesota logo featureing an M and an N"></img>
+			<h2>Search with modified focus flow</h2>
 			<div class='text-block'>
 				
-				<div id="viewDiv" style= "height:400px; width:900px" role="application" title="Describe this map to me."></div>
+				<div id="viewDiv3" style= "height:400px; width:900px" role="application" title="Esri search widget focus flow."></div>
 		
 			</div>
 		</div>
@@ -359,13 +367,29 @@
 
 	<div class='slide' >
 		<div class='content'>
-			<h2>Map navigation and description.</h2>
+			<img class='logo' src="files/state-logo.png" alt="small state of Minnesota logo featureing an M and an N"></img>
+			<h2 >More focus flow</h2>
 			<div class='text-block'>
+				<p>Send the user to the new DOM element and then back to the natural flow of elements when they are done.</p>
+				<p>searchWidget.on("search-complete", () => myFunction())</p>
+				<p>shift the focus flow to popup using view.popup.focus()</p>
+				<p>on popup close, shift the focus back to the search.</p>
+				<p>once !view.popup.visible => search.focus();</p>
+				<p><a href='https://www.esri.com/arcgis-blog/products/js-api-arcgis/developers/build-accessible-web-apps-with-arcgis-maps-sdk-for-javascript-and-calcite-design-system/' target = '_blank'>Esri's "Build accessible web maps"</a> a 2023 blog post</p>
+			</div>
+		</div>
+	</div>
 
-				<p>Query the map and tell me about it.</p>
-				<p>Use custom key commands "Alt-i", or "Alt-s" to learn more.</p>
-				<p>Use the plus, minus, and arrow keys to navigate.</p>
+
+	<div class='slide' >
+		<div class='content'>
+			<img class='logo' src="files/state-logo.png" alt="small state of Minnesota logo featureing an M and an N"></img>
+			<button class="button" style="float:right;" tabindex="-1" onclick="maskDiv()">Add mask</button>
+			<h2>Map description.</h2>
+			<div class='text-block'>
 				
+				<div id="viewDiv4" style= "height:400px; width:900px" role="application" title="Map that lists its lakes and rivers."></div>
+		
 			</div>
 		</div>
 	</div>
@@ -390,6 +414,54 @@
 	<div class='slide' >
 		<div class='content'>
 			<img class='logo' src="files/state-logo.png" alt="small state of Minnesota logo featureing an M and an N"></img>
+			<button class="button" style="float:right;" tabindex="-1" onclick="maskDiv()">Add mask</button>
+			
+			<h2>Providing keyboard access to map features.</h2>
+			<div class='text-block'>
+				
+				<div id="viewDiv" style= "height:400px; width:900px" role="application" title="Describe this map to me."></div>
+		
+			</div>
+		</div>
+	</div>
+
+	<div class='slide' >
+		<div class='content'>
+			<img class='logo' src="files/state-logo.png" alt="small state of Minnesota logo featureing an M and an N"></img>
+			
+			<h2>Hot keys for navigation a query.</h2>
+			<div class='text-block'>
+
+				<p>Query the map and tell me about it.</p>
+				<p>Use custom key commands "Alt-i" to learn more.</p>
+				<p>Use the plus, minus, and arrow keys to navigate.</p>
+				<p>Provide a way to turn them off! (a WCAG 2.1 standard)</p>
+				
+			</div>
+		</div>
+	</div>
+
+	<div class='slide' >
+		<div class='content'>
+			<img class='logo' src="files/state-logo.png" alt="small state of Minnesota logo featureing an M and an N"></img>
+			<h2 >Keyup events</h2>
+			<div class='text-block'>
+				<p><b>watching for the keyup</b> (not keypress!)</p>
+				<p>document.addEventListener('keyup', myFunction());</p>
+				<p>If the keyup is Alt+i (alt === true && key === 73)</p>
+				<p>myFunction is finding features using the view.center property.</p>
+				<p>If the key is an arrow key</p>
+				<p>myFunction is updating the location of the search box graphic.</p>
+				<p>It then updates a div with either the results or the direction.</p>				
+				
+			</div>
+		</div>
+	</div>	
+
+	<div class='slide' >
+		<div class='content'>
+			<img class='logo' src="files/state-logo.png" alt="small state of Minnesota logo featureing an M and an N"></img>
+			
 			<h2 >Adding a button to an Esri map</h2>
 			<div class='text-block'>
 
@@ -435,19 +507,31 @@
 	<div class='slide' >
 		<div class='content'>
 			<img class='logo' src="files/state-logo.png" alt="small state of Minnesota logo featureing an M and an N"></img>
-			<h2 >Keyup events</h2>
+			
+			<h2>An example of providing keyboard access to map features.</h2>
 			<div class='text-block'>
-				<p><b>watching for the keyup</b> (not keypress!)</p>
-				<p>document.addEventListener('keyup', myFunction());</p>
-				<p>If the keyup is Alt+i (alt === true && key === 73)</p>
-				<p>myFunction is finding features using the view.center property.</p>
-				<p>If the key is an arrow key</p>
-				<p>myFunction is updating the location of the search box graphic.</p>
-				<p>It then updates a div with either the results or the direction.</p>				
 				
+				<p><a href='https://pca-gis02.pca.state.mn.us/EQB/' target="_blank">The EQB's environmental review projects map</a></p>
+		
 			</div>
 		</div>
-	</div>	
+	</div>
+
+	<div class='slide' >
+		<div class='content'>
+			<img class='logo' src="files/state-logo.png" alt="small state of Minnesota logo featureing an M and an N"></img>
+			
+			<h2>Bring it all together.</h2>
+			<div class='text-block'>
+				
+				<p><a href='/git/geospatial/esri-js-api/accessible-maps/wimn-demo/wimn-demo.html' target="_blank">A What's in My Neighborhood demo.</a></p>
+				<!--<p><a href='/accessibility-demo/listen-to-maps/wimn-demo/wimn-demo.html' target="_blank">A What's in My Neighborhood demo.</a></p>-->
+		
+			</div>
+		</div>
+	</div>
+
+
 	
 	<!-- recap -->
 	<div class='slide' >
@@ -455,12 +539,13 @@
 			<img class='logo' src="files/state-logo.png" alt="small state of Minnesota logo featureing an M and an N"></img>
 			<h2 >Recap</h2>
 			<div class='text-block'>
-				<p>Plan for a logical flow. search > results > map</p>
-				<p><a href='https://experience.arcgis.com/experience/6f8337fd9db54c0ebe3f7a66c4cf3cc2' target='_blank'>Be descriptive.</a></p>
-				<p>Dynamic content should be read.</p>
+				<p>A web application can do almost anything so please, please, please,</p>
+				<p><b>Reuse common patterns.</b></p>
+				<p>Create a logical element flow. search > results > map</p>
+				<p>Insert dynamic content into the natural focus order or use an ARIA live region.</p>
 				<p>Use custom keyup events and map buttons carefully.</p>
-				<p>A web application can be any crazy thing your customers come up with!</p>
-				<p>Reuse common patterns and techniques.</p>
+				<p><b>Be descriptive!</b></p>
+				<p>Use titles, labels, alt text, and semantic HTML elements.</p>
 			</div>
 		</div>
 	</div>
@@ -468,28 +553,17 @@
 	<div class='slide' >
 		<div class='content'>
 			<img class='logo' src="files/state-logo.png" alt="small state of Minnesota logo featureing an M and an N"></img>
-			<h2 >The to-do list</h2>
+			<h2 >The TO DO list</h2>
 			<div class='text-block'>
 				<p>Use section elements main, nav, headder, and footer.</p>
-				<p>Create roles and titles for my map div.</p>
-				<p>Write more descriptive titles for application elements.</p>
-				<p>Set tabindex on application divs.</p>
-				<p>Handle dynamic content, take control of the focus order.</p>
+				<p>Create roles and titles for your map div.</p>
+				<p>Write descriptive titles.</p>
+				<p>Set a tabindex.</p>
+				<p>Handle dynamic content.</p> 
+				<p>Take control of the focus order.</p>
 			</div>
 		</div>
 	</div>
-
-	<div class='slide' >
-		<div class='content'>
-			<h2>Another search example.</h2>
-			<div class='text-block'>
-				
-				<div id="viewDiv3" style= "height:400px; width:900px" role="application" title="Esri search widget focus flow."></div>
-		
-			</div>
-		</div>
-	</div>
-
 	
 	<!-- Resources -->
 	<div class='slide' >
@@ -497,41 +571,46 @@
 			<img class='logo' src="files/state-logo.png" alt="small state of Minnesota logo featureing an M and an N"></img>
 			<h2>Resources</h2>
 			<div class='text-block'>
+				
+				<p><a href='https://www.w3.org/WAI/ARIA/apg/' target = '_blank'>ARIA Authoring Practices Guide</a> </p>
+
 				<p><a href='https://mn.gov/mnit/about-mnit/accessibility/maps/web.jsp' target = '_blank'>MNIT Interactive Web Map accessibility resources</a> </p>
+				<p><a href='https://mn365.sharepoint.com/sites/MNIT-OfficeofAccessibility/SitePages/Training/wcag/maps-gis.aspx'target = '_blank'>GIS and WCAG 2.1</a> (a MNIT SharePoint site)</p>
 				<p><a href='https://github.com/Esri/a11y-map/tree/master' target = '_blank'>Esri's a11y map repo</a> </p>
-				<p><a href='https://www.esri.com/arcgis-blog/products/js-api-arcgis/developers/build-accessible-web-apps-with-arcgis-maps-sdk-for-javascript-and-calcite-design-system/' target = '_blank'>Esri's "Build accessible web maps..." a blog post</a> </p>
+				<p><a href='https://www.esri.com/arcgis-blog/products/js-api-arcgis/developers/build-accessible-web-apps-with-arcgis-maps-sdk-for-javascript-and-calcite-design-system/' target = '_blank'>Esri's "Build accessible web maps"</a> a 2023 blog post</p>
+				<p><a href='https://www.esri.com/arcgis-blog/products/js-api-arcgis/developers/build-accessibility-into-your-web-maps-with-arcgis-maps-sdk-for-javascript/'target = '_blank'> Esri's "Build Accessibility into your Web Maps"</a> a 2024 blog post</p>
 				<p><a href="https://www.youtube.com/watch?v=qdB8SRhqvFc" target="_blank">ARIA, Accessibility APIs and coding like you give a damn! - Léonie Watson</a></p>
+				<p><a href="https://www.youtube.com/watch?v=lFzWAsA76DU" target="_blank">Accessible.JS - Jemima Abu</a></p>
+
 				<!--  13 lines, that's about the length of list that will fit on a slide. -->
 			</div>
 		</div>
 	</div>
 
 	<div class='slide' >
-		<h1></h1>
-		<h3>"Good design makes hard things easy."</h3>
-		<div class='content-center'>
-			<p>- François Chollet</p>
-			</br>
-			<p><i>Enjoy, and thanks for hanging out with me today! - Jason</i></p>
-			<p><i>jason.ewert@state.mn.us</i></p>
-			<p><i>github.com/JasonEwert</i></p>
+		<div class='content'>
+			<img class='logo' src="files/state-logo.png" alt="small state of Minnesota logo featureing an M and an N"></img>
+			<h3>"Good design makes hard things easy."</h3>
+			<div class='content-center'>
+				</br>
+				<p><i>Enjoy, and thanks for hanging out with me today! - Jason</i></p>
+				<p><i>jason.ewert@state.mn.us</i></p>
+				<p><i>github.com/JasonEwert</i></p>
+			</div>
 		</div>
 	</div>
+
 	<!--
 	<div class='slide' >
 		<div class='content'>
+			<img class='logo' src="files/state-logo.png" alt="small state of Minnesota logo featureing an M and an N"></img>
 			<h2>A New Slide</h2>
-			<div class=''>
+			<div class='text-block'>
 				<p>some text</p>
 			</div>
 		</div>
 	</div>
 	-->
-	
-	
-	
-	
-	
-	
+
 	</body>
 </html>	
