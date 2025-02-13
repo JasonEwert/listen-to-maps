@@ -108,7 +108,7 @@ class SearchMap {
                      *****************************************************************/
 
                     const map = new Map({
-                        basemap: "satellite", //"topo-vector", //"satellite", //"hybrid", //"streets-vector",
+                        basemap: "gray-vector", //"satellite", //"topo-vector", //"satellite", //"hybrid", //"streets-vector",
                         layers: [ graphicsLayer, wimnLayer, mapCenterGraphic]
                     });
 
@@ -224,7 +224,8 @@ class SearchMap {
 
                     let basemapTopo = new Basemap({
                     portalItem: {
-                        id: "931d892ac7a843d7ba29d085e0433465"  // USGS topo
+                        //id: "931d892ac7a843d7ba29d085e0433465"  // USGS topo
+						id: "55ebf90799fa4a3fa57562700a68c405" // streets
                     }
                     });
 

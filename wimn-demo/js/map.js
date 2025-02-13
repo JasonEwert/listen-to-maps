@@ -341,7 +341,7 @@ require([
 		*****************************************************************/ 
 
 		let map = new Map({
-			basemap: "hybrid",
+			basemap: "gray-vector",
 			layers: [waterbodiesLayer,boundariesLayer,mdhLayer,layer,searchResultsGroupLayer,drawGraphics,mapCenterGraphic] 
 		});
 
