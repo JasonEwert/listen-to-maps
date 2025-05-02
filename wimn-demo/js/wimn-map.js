@@ -19,26 +19,24 @@ class SearchMap {
 			"esri/widgets/BasemapToggle",
 			"esri/widgets/ScaleBar",
 			"esri/layers/FeatureLayer",
-            "esri/layers/MapImageLayer",
+                        "esri/layers/MapImageLayer",
 			"esri/rest/find",
 			 "esri/rest/support/FindParameters",
 			"esri/Graphic",
 			"esri/layers/GraphicsLayer",
-            "esri/rest/identify",
-            "esri/rest/support/IdentifyParameters",
+                        "esri/rest/identify",
+                        "esri/rest/support/IdentifyParameters",
 			"esri/core/reactiveUtils"
 			],
 		function(Map, MapView, Basemap, BasemapToggle, 
-				 ScaleBar,
-				  FeatureLayer,
-                  MapImageLayer,
-				  find, FindParameters,
-				  Graphic, GraphicsLayer,
-                  identify, IdentifyParameters,
-				  reactiveUtils
-				) {
+			 ScaleBar,  FeatureLayer,  MapImageLayer,
+			find, FindParameters,
+			Graphic, GraphicsLayer,
+                        identify, IdentifyParameters,
+			reactiveUtils
+			) {
 				
-					let wimnLayer = new MapImageLayer({
+			let wimnLayer = new MapImageLayer({
                         url: "https://pca-gis02.pca.state.mn.us/arcgis/rest/services/WIMN/wimn_tempo/MapServer",
                         title: "Sites",
                         sublayers: [
@@ -75,7 +73,7 @@ class SearchMap {
 					
 					// symbology templates
                     let pointSymbol = {
-					  type: "simple-marker", // autocasts as new SimpleMarkerSymbol()
+		      type: "simple-marker", // autocasts as new SimpleMarkerSymbol()
                       style: "square",
                       color: [ 0, 255, 255, 0.6 ],
                       size: "18px",
@@ -108,7 +106,7 @@ class SearchMap {
                      *****************************************************************/
 
                     const map = new Map({
-                        basemap: "gray-vector", //"satellite", //"topo-vector", //"satellite", //"hybrid", //"streets-vector",
+                        basemap: "hybrid", //"gray-vector", //"satellite", //"topo-vector", //"satellite", //"hybrid", //"streets-vector",
                         layers: [ graphicsLayer, wimnLayer, mapCenterGraphic]
                     });
 
@@ -119,26 +117,26 @@ class SearchMap {
                         zoom: 8
                     });
 					
-					/*****************************************************************
-					* The Search (using Find)
-					*****************************************************************/
+		/*****************************************************************
+		* The Search (using Find)
+		*****************************************************************/
 
-					let resultsDiv = document.getElementById("results");
-					let resultsListDiv = document.getElementById("searchResults");	
-					let findUrl = "https://pca-gis02.pca.state.mn.us/arcgis/rest/services/WIMN/wimn_tempo/MapServer";
-					
-					const params = new FindParameters({
-					  layerIds: [1],
-					  searchFields: ["name"],
-					  returnGeometry: true
-					});
-					
-					function doFind() {
-					  params.searchText = document.getElementById("searchText").value;
-					  find.find(findUrl, params).then(showResults).catch(rejectedPromise);				  
-					}
-					
-					function showResults(response) {
+		let resultsDiv = document.getElementById("results");
+		let resultsListDiv = document.getElementById("searchResults");	
+		let findUrl = "https://pca-gis02.pca.state.mn.us/arcgis/rest/services/WIMN/wimn_tempo/MapServer";
+		
+		const params = new FindParameters({
+		  layerIds: [1],
+		  searchFields: ["name"],
+		  returnGeometry: true
+		});
+		
+		function doFind() {
+		  params.searchText = document.getElementById("searchText").value;
+		  find.find(findUrl, params).then(showResults).catch(rejectedPromise);				  
+		}
+		
+		function showResults(response) {
 					  
                       const results = response.results;
 
@@ -162,14 +160,13 @@ class SearchMap {
 					  results.forEach(function (findResult, i) {
 						
                         let resultText;
-						let name = findResult.feature.attributes["name"];
-						let status = findResult.feature.attributes["active_flag"];
+			let name = findResult.feature.attributes["name"];
+			let status = findResult.feature.attributes["active_flag"];
                         let industry = findResult.feature.attributes["industrial_classification"];
                         let programs = findResult.feature.attributes["program_name_list"];
                         let ids = findResult.feature.attributes["mpca_id_list"];
                         let activities = findResult.feature.attributes["activity_list"];
-
-						let shp = findResult.feature.geometry;
+			let shp = findResult.feature.geometry;
 
                         if(industry == "Null"){
                             resultText = "<li><h3>" + name + "</h3>" + "<p>This site is in the following programs: " + programs + "</p></li>"
@@ -180,11 +177,11 @@ class SearchMap {
 						//resultsListDiv.innerHTML += (resultText)
                         let li = document.createElement('li')
                         li.innerHTML = resultText
-						resultsList.appendChild(li)
+			resultsList.appendChild(li)
 
                         addGeom(shp);
 						
-					  });
+		  });
 
                       // use .focus() rather than ARIA live regions.
                       // resultsDiv.setAttribute('aria-live', 'polite');
@@ -218,14 +215,14 @@ class SearchMap {
 					document.getElementById("findBtn").addEventListener("click", doFind);
 					
 
-					/*****************************************************************
+		    /*****************************************************************
                      * basemap toggle
                      *****************************************************************/
 
                     let basemapTopo = new Basemap({
                     portalItem: {
                         //id: "931d892ac7a843d7ba29d085e0433465"  // USGS topo
-						id: "55ebf90799fa4a3fa57562700a68c405" // streets
+			id: "55ebf90799fa4a3fa57562700a68c405" // streets
                     }
                     });
 
