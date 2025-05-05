@@ -272,7 +272,7 @@ class SearchMap {
                                 // options for the map description
                                 let searchTolerance = 200;
                                 //executeIdentifyCTU(searchTolerance);
-                                executeIdentifyCTU(searchTolerance);
+				executeIdentifyPOI(searchTolerance, [1,3, 5]);
                                 //addMapCenterGraphic(searchTolerance); // adds the query tollarance graphic
                                 
                             }
