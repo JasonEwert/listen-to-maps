@@ -271,8 +271,13 @@ class SearchMap {
                 
                                 // options for the map description
                                 let searchTolerance = 200;
+				if (zoom > 14){
+					executeIdentifyPOI(searchTolerance, [1,3, 5]);
+				} esle{
+					executeIdentifyCTU(searchTolerance);
+				};
                                 //executeIdentifyCTU(searchTolerance);
-				executeIdentifyPOI(searchTolerance, [1,3, 5]);
+				//executeIdentifyPOI(searchTolerance, [1,3, 5]);
                                 //addMapCenterGraphic(searchTolerance); // adds the query tollarance graphic
                                 
                             }
