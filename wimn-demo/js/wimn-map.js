@@ -273,7 +273,7 @@ class SearchMap {
                                 let searchTolerance = 200;
 				if (zoom > 14){
 					executeIdentifyPOI(searchTolerance, [1,3, 5]);
-				} esle{
+				} else{
 					executeIdentifyCTU(searchTolerance);
 				};
                                 //executeIdentifyCTU(searchTolerance);
