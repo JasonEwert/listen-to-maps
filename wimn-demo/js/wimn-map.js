@@ -271,10 +271,10 @@ class SearchMap {
                 
                                 // options for the map description
                                 let searchTolerance = 200;
-				if (zoom > 14){
-					executeIdentifyPOI(searchTolerance, [1,3, 5]);
-				} else{
-					executeIdentifyCTU(searchTolerance);
+				if (zoom > 15){
+					executeIdentifyPOI(searchTolerance, [1,3, 5])
+				} else {
+					executeIdentifyCTU(searchTolerance)
 				};
                                 //executeIdentifyCTU(searchTolerance);
 				//executeIdentifyPOI(searchTolerance, [1,3, 5]);
